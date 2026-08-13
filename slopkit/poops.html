@@ -141,8 +141,6 @@
         box-shadow: 0 18px 42px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.04);
         border-radius: 14px; padding: 13px 15px; margin: 10px auto 0; }
 
-  body.loader-ready #scr, body.prompt-ready #scr { display:none; }
-
   body.quiet tr:not(.r-FAIL) td.d .note   { display: none; }
 
   body.quiet tr:not(.r-FAIL) td.d > span:first-child {
@@ -162,164 +160,188 @@
     font-size:25px; font-weight:800; text-align:center; letter-spacing:.02em; }
   #failureMessage.on { display:block; }
 
-  body.loader-ready, body.prompt-ready { justify-content:flex-start; overflow-y:auto;
-    padding-top:36px; font-family:"Segoe UI",Arial,sans-serif; }
-  body.loader-ready #cat, body.prompt-ready #cat { display:none; }
-  body.loader-ready #nav { display:none !important; }
-  #payloadMenu { display:none; width:1220px; max-width:94vw; margin:0 auto 30px; }
-  #payloadMenu.on { display:block; }
-  .payloadHeader { position:relative; margin:0 6px 24px; padding:24px 26px;
-    border:1px solid rgba(255,255,255,.12); border-radius:22px;
-    background:linear-gradient(135deg,rgba(35,39,83,.94),rgba(15,20,38,.94));
-    box-shadow:0 18px 48px rgba(0,0,0,.3); }
-  .payloadEyebrow { color:#67e2ad; font-size:12px; font-weight:900;
-    letter-spacing:.22em; text-transform:uppercase; }
-  .payloadHeader h2 { margin:6px 0 4px; color:#fff; font-size:38px;
-    line-height:1.1; letter-spacing:-.03em; }
-  .payloadHeader p { margin:0; color:#aeb7ce; font-size:16px; }
-  .homeLink { position:absolute; top:25px; right:25px; padding:10px 15px;
-    border:1px solid rgba(255,255,255,.16); border-radius:12px; color:#dce3f5;
-    background:rgba(255,255,255,.06); text-decoration:none; font-size:14px;
-    font-weight:700; }
-  .homeLink:focus { outline:3px solid #fff; }
-  #payloadMenu .payloadGrid { display:block; font-size:0; }
-  #payloadMenu .payloadTile {
-    box-sizing:border-box; position:relative; display:inline-block; vertical-align:top;
-    width:calc(33.333% - 12px); min-width:0; min-height:108px;
-    margin:6px; padding:18px 18px; border:1px solid rgba(255,255,255,.12);
-    border-radius:18px; color:#f5f7ff; background:linear-gradient(145deg,#1b2135,#111624);
-    box-shadow:0 12px 30px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.04);
-    text-decoration:none !important; transition:transform .12s ease,border-color .12s ease;
+  #main-content {
+    position:relative; min-width:0; min-height:0; width:100%; height:100%;
+    overflow:hidden; box-sizing:border-box;
   }
-  #payloadMenu .payloadTile:focus { outline:0; transform:translateY(-4px);
-    border-color:#fff; box-shadow:0 0 0 3px rgba(255,255,255,.16),0 18px 38px rgba(0,0,0,.38); }
-  .payloadCopy { display:inline-block; vertical-align:middle; width:100%;
-    min-width:0; padding-right:55px; box-sizing:border-box; }
-  .payloadName { display:block; color:#fff; font-size:18px; font-weight:800;
-    line-height:1.15; }
-  .payloadDesc { display:block; margin-top:5px; color:#8994ad; font-size:13px;
-    line-height:1.25; }
-  .payloadStatus { position:absolute; right:15px; top:14px; color:#6edca9;
-    font-size:10px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
-  .payloadTile[data-state="sending"] .payloadStatus { color:#ffd16d; }
-  .payloadTile[data-state="sent"] .payloadStatus { color:#6edca9; }
-  .payloadTile[data-state="failed"] .payloadStatus { color:#ff6f7f; }
-  #payloadMenu .payloadTile.busy { opacity:.42; }
+  #main-content > .app-view {
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    box-sizing:border-box; opacity:0; pointer-events:none;
+    transition:opacity .3s ease-in-out;
+  }
+  #main-content > .app-view.selected {
+    opacity:1 !important; pointer-events:auto !important;
+  }
+  #console-view {
+    display:flex; flex-direction:column; align-items:stretch; overflow:hidden;
+  }
+  #payloads-view {
+    display:grid !important; grid-template-rows:auto 1fr;
+    overflow:hidden; background:#0c0c0f; color:#fff;
+  }
+  #prompt-view {
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden; background:#0c0c0f; color:#fff;
+  }
+  .payloadHeader {
+    position:relative; box-sizing:border-box; min-height:112px;
+    padding:.5rem; text-align:center;
+  }
+  .payloadHeader h2 {
+    margin:.35rem 0; color:#fff; font-size:2rem; line-height:1.2;
+  }
+  .payloadEyebrow { color:#ccc; font-size:1rem; }
+  .payloadHeader p { margin:0; color:#ccc; font-size:.9rem; }
+  .homeLink {
+    position:absolute; top:.75rem; right:1rem; padding:.5rem 1rem;
+    border-radius:1rem; color:#fff; background:#202125;
+    text-decoration:none; font-size:1rem;
+  }
+  .homeLink:hover, .homeLink:focus {
+    outline:0; background:#a2a2a6; color:#202020;
+  }
 
-  #loaderPrompt { display:none; width:620px; max-width:90vw; margin:auto;
-    padding:34px; text-align:center; border:1px solid rgba(255,255,255,.13);
-    border-radius:24px; background:linear-gradient(145deg,#1d2238,#101521);
-    box-shadow:0 24px 70px rgba(0,0,0,.4); }
-  #loaderPrompt.on { display:block; }
-  .promptBadge { display:block; width:68px; height:68px; line-height:68px;
-    margin:0 auto 18px; border-radius:20px;
-    color:#ffd270; background:#3b2b17; border:1px solid #725326;
-    font:900 16px/1 "Segoe UI",Arial,sans-serif; }
-  #loaderPrompt h2 { margin:0; color:#fff; font-size:34px; }
-  #loaderPrompt p { margin:10px auto 24px; max-width:470px; color:#aab4cc;
-    font-size:16px; }
+  #payloads-view .payloadGrid {
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-auto-rows:auto;
+    column-gap:2.5rem;
+    row-gap:1rem;
+    width:100%;
+    height:auto; min-height:0;
+    padding:0 2rem 2rem 2rem;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    box-sizing:border-box;
+    align-content:start;
+  }
+  #payloads-view .btn {
+    display:inline-block;
+    box-sizing:border-box;
+    width:100%;
+    min-width:5rem;
+    margin:.2rem;
+    padding:1rem 2rem;
+    border:0;
+    border-radius:1.25rem;
+    background:#202125;
+    color:#fff;
+    cursor:pointer;
+    line-height:2.5rem;
+    text-align:center;
+    text-decoration:none;
+    font-size:1.3rem;
+  }
+  #payloads-view .btn:hover, #payloads-view .btn:focus {
+    outline:0;
+    background:#a2a2a6;
+    color:#202020;
+  }
+  .payload-btn-title {
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    margin:0;
+    padding:0;
+    color:#fff !important;
+    -webkit-text-fill-color:#fff;
+    line-height:2.5rem;
+    font-size:1.3rem;
+    font-weight:bolder;
+  }
+  .payload-btn-description {
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    max-width:100%;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    color:#ccc;
+    -webkit-text-fill-color:#ccc;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    line-height:2rem;
+    font-size:1rem;
+  }
+  .btn:hover .payload-btn-description,
+  .btn:focus .payload-btn-description {
+    color:#444 !important; -webkit-text-fill-color:#444;
+  }
+  .payload-btn-info {
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    color:#999;
+    -webkit-text-fill-color:#999;
+    text-overflow:ellipsis;
+    line-height:1.5rem;
+    font-size:.9rem;
+    font-weight:normal;
+  }
+  .btn:hover .payload-btn-info,
+  .btn:focus .payload-btn-info {
+    color:#555 !important; -webkit-text-fill-color:#555;
+  }
+  #payloads-view .btn:hover .payload-btn-title,
+  #payloads-view .btn:focus .payload-btn-title {
+    color:#202020 !important; -webkit-text-fill-color:#202020;
+  }
+  #payloads-view .btn.busy { opacity:.45; pointer-events:none; }
+
+  #loaderPrompt {
+    display:block; width:70%; max-width:760px; margin:0; padding:2rem;
+    box-sizing:border-box;
+    text-align:center; color:#fff;
+  }
+  .promptBadge { display:none; }
+  #loaderPrompt h2 { margin:0; color:#fff; font-size:2rem; }
+  #loaderPrompt p { margin:10px auto 24px; max-width:470px; color:#ccc; font-size:1rem; }
   .promptActions { display:block; text-align:center; }
-  .promptButton { display:inline-block; min-width:190px; padding:15px 20px;
-    margin:5px;
-    border:1px solid rgba(255,255,255,.18); border-radius:14px; color:#fff;
-    background:linear-gradient(145deg,#6748e8,#3d28a1); text-decoration:none;
-    font-size:16px; font-weight:800; }
-  .promptButton.secondary { min-width:120px; background:#20273a; color:#c5ccdd; }
-  .promptButton:focus { outline:3px solid #fff; outline-offset:2px; }
-
-  @media (max-width:900px) {
-    #payloadMenu .payloadTile { width:calc(50% - 12px); }
-  }
-
-  /* UMTX2-style sender UI: deliberately mirrors its PS5-proven controls. */
-  body.loader-ready { display:grid; grid-template-rows:1fr; width:100%; height:100vh;
-    padding:0; margin:0; overflow:hidden; background:#0c0c0f; color:#fff;
-    font-family:Arial,sans-serif; font-size:17px; }
-  body.loader-ready #payloadMenu.on { display:grid; grid-template-rows:auto 1fr;
-    width:100%; max-width:none; height:100vh; margin:0; box-sizing:border-box; }
-  body.loader-ready .payloadHeader { position:relative; margin:0; padding:.5rem;
-    text-align:center; border:0; border-radius:0; background:none; box-shadow:none; }
-  body.loader-ready .payloadEyebrow { color:#ccc; font-size:1rem; font-weight:normal;
-    letter-spacing:0; text-transform:none; }
-  body.loader-ready .payloadHeader h2 { margin:.35rem 0; color:#fff; font-size:2rem;
-    line-height:1.2; letter-spacing:0; }
-  body.loader-ready .payloadHeader p { margin:0; color:#ccc; font-size:.9rem; }
-  body.loader-ready .homeLink { top:.75rem; right:1rem; padding:.5rem 1rem;
-    border:0; border-radius:1rem; color:#fff; background:#202125; font-size:1rem; }
-  body.loader-ready .homeLink:hover, body.loader-ready .homeLink:focus {
-    outline:0; background:#a2a2a6; color:#202020; }
-  body.loader-ready #payloadMenu .payloadGrid { display:block !important;
-    width:100%; padding:1rem 1.25rem 2rem; overflow-y:scroll; overflow-x:hidden;
-    box-sizing:border-box; font-size:0; text-align:center; }
-  body.loader-ready #payloadMenu .payloadTile { position:relative; display:inline-block;
-    vertical-align:top; width:47%; min-height:0; margin:.5rem 1%;
-    padding:1rem 2rem; border:0;
-    border-radius:1.25rem; color:#fff; background:#202125; box-shadow:none;
-    line-height:normal; text-align:center; box-sizing:border-box;
-    transition:background-color .25s ease; }
-  body.loader-ready #payloadMenu .payloadTile:hover,
-  body.loader-ready #payloadMenu .payloadTile:focus { outline:0; transform:none;
-    border:0; background:#a2a2a6; color:#202020; box-shadow:none; }
-  body.loader-ready .payloadCopy { display:block; width:100%; padding:0; }
-  body.loader-ready .payloadName { display:block; line-height:2.5rem; color:inherit;
-    font-weight:bolder; font-size:1.3rem; padding:0; margin:0; }
-  body.loader-ready .payloadDesc { display:block; color:#ccc; margin:0; padding:0;
-    text-overflow:ellipsis; overflow:hidden; white-space:nowrap; line-height:2rem;
-    font-size:1rem; max-width:100%; }
-  body.loader-ready .payloadTile:hover .payloadDesc,
-  body.loader-ready .payloadTile:focus .payloadDesc { color:#444; }
-  body.loader-ready .payloadStatus { position:static; display:block; color:#999;
-    margin:0; padding:0; text-overflow:ellipsis; overflow:hidden; line-height:1.5rem;
-    font-size:.9rem; font-weight:normal; letter-spacing:0; text-transform:none; }
-  body.loader-ready .payloadTile:hover .payloadStatus,
-  body.loader-ready .payloadTile:focus .payloadStatus { color:#555; }
-  body.loader-ready #payloadMenu .payloadTile.busy { opacity:.45; }
-
-  body.prompt-ready { display:flex; align-items:center; justify-content:center;
-    width:100%; height:100vh; padding:0; margin:0; overflow:hidden;
-    background:#0c0c0f; color:#fff; font-family:Arial,sans-serif; }
-  body.prompt-ready #loaderPrompt.on { display:block; width:70%; max-width:760px;
-    margin:0; padding:2rem; border:0; border-radius:0; background:none;
-    box-shadow:none; text-align:center; }
-  body.prompt-ready .promptBadge { display:none; }
-  body.prompt-ready #loaderPrompt h2 { font-size:2rem; }
-  body.prompt-ready #loaderPrompt p { color:#ccc; }
-  body.prompt-ready .promptButton { display:inline-block; width:50%; min-width:5rem;
+  .promptButton {
+    display:inline-block; box-sizing:border-box; width:50%; min-width:5rem;
     margin:.2rem; padding:1rem 2rem; border:0; border-radius:1.25rem;
-    background:#202125; color:#fff; line-height:2.5rem; font-size:1.3rem;
-    box-sizing:border-box; }
-  body.prompt-ready .promptButton.secondary { padding:.5rem 2rem; font-size:1rem; }
-  body.prompt-ready .promptButton:hover, body.prompt-ready .promptButton:focus {
-    outline:0; background:#a2a2a6; color:#202020; }
+    background:#202125; color:#fff; line-height:2.5rem;
+    text-decoration:none; font-size:1.3rem; font-weight:800;
+  }
+  .promptButton.secondary { padding:.5rem 2rem; font-size:1rem; }
+  .promptButton:hover, .promptButton:focus {
+    outline:0; background:#a2a2a6; color:#202020;
+  }
 
   #payloadToastContainer { position:fixed; top:20px; right:20px; z-index:9999; }
-  .payloadToast { background:#15161a; color:#fff; padding:20px 25px;
-    border-radius:1rem; margin-top:10px; box-shadow:0 0 10px rgba(0,0,0,.2);
-    width:300px; opacity:1; transition:opacity .4s; pointer-events:none;
-    font:16px/1.35 Arial,sans-serif; }
+  .payloadToast {
+    width:300px; margin-top:10px; padding:20px 25px; border-radius:1rem;
+    background:#15161a; color:#fff; box-shadow:0 0 10px rgba(0,0,0,.2);
+    opacity:1; transition:opacity .4s; pointer-events:none;
+    font:16px/1.35 Arial,sans-serif;
+  }
   .payloadToast.hide { opacity:0; }
 
-  #slopkitHeader, #slopkitFooter { display:none; }
-  body.quiet:not(.loader-ready):not(.prompt-ready) { display:grid;
+  #slopkitHeader, #slopkitFooter { display:block; }
+  body.quiet { display:grid;
     grid-template-rows:auto 1fr auto; width:100%; height:100vh; padding:0; margin:0;
     overflow:hidden; align-items:stretch; justify-content:stretch;
     background:#0c0c0f; color:#fff; font-family:Arial,sans-serif; }
-  body.quiet:not(.loader-ready):not(.prompt-ready) #slopkitHeader {
+  body.quiet.payload-view-active { grid-template-rows:1fr auto; }
+  body.quiet.payload-view-active #slopkitHeader { display:none; }
+  body.quiet #slopkitHeader {
     display:block; padding:.5rem; text-align:center; }
-  body.quiet:not(.loader-ready):not(.prompt-ready) #slopkitHeader h1 {
+  body.quiet #slopkitHeader h1 {
     display:block; margin:.5rem 0; color:#fff; font-size:2rem; font-weight:bold; }
-  body.quiet:not(.loader-ready):not(.prompt-ready) #slopkitHeader p {
+  body.quiet #slopkitHeader p {
     margin:.25rem 0; color:#ccc; font-size:1rem; }
-  body.quiet:not(.loader-ready):not(.prompt-ready) #cat { display:none; }
-  body.quiet:not(.loader-ready):not(.prompt-ready) #scr { display:block;
-    box-sizing:border-box; width:auto; max-width:none; height:auto; min-height:0;
+  body.quiet #cat { display:none; }
+  body.quiet #scr { display:block;
+    box-sizing:border-box; width:auto; max-width:none; height:auto; min-height:0; flex:1;
     margin:8px; padding:8px; overflow-y:auto; overflow-x:hidden;
     border:1px solid #202125; border-radius:5px; background:inherit;
     box-shadow:none; color:#fff; font:16px/1.35 monospace; white-space:pre-wrap; }
-  body.quiet:not(.loader-ready):not(.prompt-ready) #slopkitFooter {
+  body.quiet #slopkitFooter {
     display:block; padding:.5rem; color:#ccc; text-align:center; font-size:.8rem; }
-  body.loader-ready #slopkitHeader, body.loader-ready #slopkitFooter,
-  body.prompt-ready #slopkitHeader, body.prompt-ready #slopkitFooter { display:none; }
 
   #wrap { display:none !important; }
 </style>
@@ -329,58 +351,55 @@
   <h1>PS5 SlopKit Jailbreak (9.00-12.00)</h1>
   <p>Current firmware: <b id="currentFirmware">detecting...</b></p>
 </div>
-<div id="failureMessage">UNLUCKY &mdash; YOU NEED TO REBOOT</div>
-<div id="cat">
-  <img id="catImage" src="mmhmm-cats-ps5.gif" alt="">
-</div>
-<h1>poops</h1>
-<div id="reboot"></div>
-<div id="verdict"></div>
-<div id="danger"></div>
-<div id="stage">idle</div>
-<div id="vitals"></div>
-<div id="cfg"></div>
-<pre id="early"></pre>
-<pre id="scr"></pre>
-<div id="payloadMenu">
-  <div class="payloadHeader">
-    <h2>PS5 SlopKit Payloads (9.00-12.00)</h2>
-    <div class="payloadEyebrow" id="payloadNetworkStatus">Listening on console port 9021</div>
-    <p id="payloadProgress">Select a payload to send it to the ELF loader.</p>
-    <a class="homeLink" href="../index.html">Home</a>
+<div id="main-content">
+  <div id="console-view" class="app-view selected">
+    <div id="failureMessage">UNLUCKY &mdash; YOU NEED TO REBOOT</div>
+    <div id="cat">
+      <img id="catImage" src="mmhmm-cats-ps5.gif" alt="">
+    </div>
+    <h1>poops</h1>
+    <div id="reboot"></div>
+    <div id="verdict"></div>
+    <div id="danger"></div>
+    <div id="stage">idle</div>
+    <div id="vitals"></div>
+    <div id="cfg"></div>
+    <pre id="early"></pre>
+    <pre id="scr"></pre>
+    <div id="nav"></div>
+    <div id="arm" hidden>Open this page with <b>?go=1</b> to arm it. Nothing runs
+    otherwise.</div>
+    <div id="wrap">
+      <table>
+        <thead><tr><th>#</th><th>test</th><th>st</th><th>result</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div id="tally"></div>
+    <div id="summary"></div>
   </div>
-  <div class="payloadGrid">
-    <a class="payloadTile" href="#" data-name="ftpsrv-ps5.elf"><span class="payloadCopy"><strong class="payloadName">ftpsrv</strong><small class="payloadDesc">FTP server. Runs on port 2121.</small></span><span class="payloadStatus" data-ready="ftpsrv-ps5.elf - john-tornblom">ftpsrv-ps5.elf &centerdot; john-tornblom</span></a>
-    <a class="payloadTile" href="#" data-name="gdbsrv-ps5.elf"><span class="payloadCopy"><strong class="payloadName">gdbsrv</strong><small class="payloadDesc">GDB server. Runs on port 2159.</small></span><span class="payloadStatus" data-ready="gdbsrv-ps5.elf - john-tornblom">gdbsrv-ps5.elf &centerdot; john-tornblom</span></a>
-    <a class="payloadTile" href="#" data-name="klogsrv-ps5.elf"><span class="payloadCopy"><strong class="payloadName">klogsrv</strong><small class="payloadDesc">Kernel log server. Runs on port 3232.</small></span><span class="payloadStatus" data-ready="klogsrv-ps5.elf - john-tornblom">klogsrv-ps5.elf &centerdot; john-tornblom</span></a>
-    <a class="payloadTile" href="#" data-name="shsrv-ps5.elf"><span class="payloadCopy"><strong class="payloadName">shsrv</strong><small class="payloadDesc">Telnet shell server. Runs on port 2323.</small></span><span class="payloadStatus" data-ready="shsrv-ps5.elf - john-tornblom">shsrv-ps5.elf &centerdot; john-tornblom</span></a>
-    <a class="payloadTile" href="#" data-name="websrv-ps5.elf"><span class="payloadCopy"><strong class="payloadName">websrv</strong><small class="payloadDesc">Homebrew web server. Runs on port 8080.</small></span><span class="payloadStatus" data-ready="websrv-ps5.elf - john-tornblom">websrv-ps5.elf &centerdot; john-tornblom</span></a>
-    <a class="payloadTile" href="#" data-name="kstuff.elf"><span class="payloadCopy"><strong class="payloadName">ps5-kstuff</strong><small class="payloadDesc">Kernel support payload and FPKG enabler.</small></span><span class="payloadStatus" data-ready="kstuff.elf - EchoStretch">kstuff.elf &centerdot; EchoStretch</span></a>
-    <a class="payloadTile" href="#" data-name="PLK.elf"><span class="payloadCopy"><strong class="payloadName">PLK Manager</strong><small class="payloadDesc">Payload management tools.</small></span><span class="payloadStatus" data-ready="PLK.elf - PLK">PLK.elf &centerdot; PLK</span></a>
-    <a class="payloadTile" href="#" data-name="shadowmountplus.elf"><span class="payloadCopy"><strong class="payloadName">ShadowMountPlus</strong><small class="payloadDesc">Mount and manage game images.</small></span><span class="payloadStatus" data-ready="shadowmountplus.elf - Drakmor">shadowmountplus.elf &centerdot; Drakmor</span></a>
+  <div id="payloads-view" class="app-view">
+    <div class="payloadHeader">
+      <h2>PS5 SlopKit Payloads (9.00-12.00)</h2>
+      <div class="payloadEyebrow" id="payloadNetworkStatus">Listening on console port 9021</div>
+      <p id="payloadProgress">Select a payload to send it to the ELF loader.</p>
+      <a class="homeLink" href="../index.html">Home</a>
+    </div>
+    <div class="payloadGrid"></div>
+  </div>
+  <div id="prompt-view" class="app-view">
+    <div id="loaderPrompt">
+      <div class="promptBadge">9021</div>
+      <h2>ELF loader is not running</h2>
+      <p>Port 9021 is not open. Would you like to run the jailbreak now and start the ELF loader?</p>
+      <div class="promptActions">
+        <a id="promptJailbreak" class="promptButton" href="#">Jailbreak</a>
+        <a class="promptButton secondary" href="../index.html">Cancel</a>
+      </div>
+    </div>
   </div>
 </div>
 <div id="payloadToastContainer"></div>
-<div id="loaderPrompt">
-  <div class="promptBadge">9021</div>
-  <h2>ELF loader is not running</h2>
-  <p>Port 9021 is not open. Would you like to run the jailbreak now and start the ELF loader?</p>
-  <div class="promptActions">
-    <a id="promptJailbreak" class="promptButton" href="#">Jailbreak</a>
-    <a class="promptButton secondary" href="../index.html">Cancel</a>
-  </div>
-</div>
-<div id="nav"></div>
-<div id="arm" hidden>Open this page with <b>?go=1</b> to arm it. Nothing runs
-otherwise.</div>
-<div id="wrap">
-<table>
-  <thead><tr><th>#</th><th>test</th><th>st</th><th>result</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
-</div>
-<div id="tally"></div>
-<div id="summary"></div>
 <div id="slopkitFooter">slopkit final</div>
 
 <div id="console" hidden></div>
@@ -730,6 +749,7 @@ const CONCISE_SCREEN_SHOW = {
     "STAGE5-DONE": 1,
     "POOPS-COMPLETE": 1,
     "POOPS-FAILED": 1,
+    "ELFLDR-MENU-VISIBLE": 1,
     "ELF-SENT": 1,
     "ELF-SEND-FAILED": 1,
     "ELF-SENDER-BLOCKED": 1
@@ -937,7 +957,7 @@ const rowsEl = document.getElementById("rows");
 const tallyEl = document.getElementById("tally");
 const summaryEl = document.getElementById("summary");
 const navEl = document.getElementById("nav");
-const payloadMenuEl = document.getElementById("payloadMenu");
+const payloadMenuEl = document.getElementById("payloads-view");
 const rowByKey = new Map();
 let payloadSendBusy = false;
 const PAYLOAD_PORT = 9021;
@@ -950,28 +970,96 @@ let payloadSendTimeoutStore = null;
 let payloadSenderBlocked = "";
 let consoleNetworkInfo = { ip: "", name: "" };
 
+const PAYLOADS = Object.freeze([
+    { title: "ftpsrv", description: "FTP server. Runs on port 2121.",
+        name: "ftpsrv-ps5.elf", info: "ftpsrv-ps5.elf - john-tornblom" },
+    { title: "gdbsrv", description: "GDB server. Runs on port 2159.",
+        name: "gdbsrv-ps5.elf", info: "gdbsrv-ps5.elf - john-tornblom" },
+    { title: "klogsrv", description: "Kernel log server. Runs on port 3232.",
+        name: "klogsrv-ps5.elf", info: "klogsrv-ps5.elf - john-tornblom" },
+    { title: "shsrv", description: "Telnet shell server. Runs on port 2323.",
+        name: "shsrv-ps5.elf", info: "shsrv-ps5.elf - john-tornblom" },
+    { title: "websrv", description: "Homebrew web server. Runs on port 8080.",
+        name: "websrv-ps5.elf", info: "websrv-ps5.elf - john-tornblom" },
+    { title: "ps5-kstuff", description: "Kernel support payload and FPKG enabler.",
+        name: "kstuff.elf", info: "kstuff.elf - EchoStretch" },
+    { title: "PLK Manager", description: "Payload management tools.",
+        name: "PLK.elf", info: "PLK.elf - PLK" },
+    { title: "ShadowMountPlus", description: "Mount and manage game images.",
+        name: "shadowmountplus.elf", info: "shadowmountplus.elf - Drakmor" }
+]);
+
+function populatePayloadButtons() {
+    const grid = payloadMenuEl.getElementsByClassName("payloadGrid")[0];
+    if (!grid || grid.getElementsByClassName("payloadTile").length) return;
+
+    for (let i = 0; i < PAYLOADS.length; ++i) {
+        const payload = PAYLOADS[i];
+        const button = document.createElement("a");
+        button.classList.add("payloadTile");
+        button.classList.add("btn");
+        button.tabIndex = 0;
+        button.setAttribute("data-name", payload.name);
+
+        const title = document.createElement("p");
+        title.classList.add("payloadName");
+        title.classList.add("payload-btn-title");
+        title.textContent = payload.title;
+
+        const description = document.createElement("p");
+        description.classList.add("payload-btn-description");
+        description.textContent = payload.description;
+
+        const info = document.createElement("p");
+        info.classList.add("payloadStatus");
+        info.classList.add("payload-btn-info");
+        info.setAttribute("data-ready", payload.info);
+        info.textContent = payload.info.replace(" - ", " · ");
+
+        button.appendChild(title);
+        button.appendChild(description);
+        button.appendChild(info);
+        button.addEventListener("click", function (event) {
+            if (event && event.preventDefault) event.preventDefault();
+            sendPayloadInPlace(payload.name, button);
+        });
+        grid.appendChild(button);
+    }
+}
+populatePayloadButtons();
+
+function switchAppView(viewId) {
+    const main = document.getElementById("main-content");
+    const target = document.getElementById(viewId);
+    if (!main || !target) return;
+    if (viewId === "payloads-view")
+        document.body.classList.add("payload-view-active");
+    else
+        document.body.classList.remove("payload-view-active");
+    const views = main.getElementsByClassName("app-view");
+    for (let i = 0; i < views.length; ++i)
+        views[i].classList.remove("selected");
+    target.classList.add("selected");
+    void target.offsetHeight;
+}
+
+function setPayloadTileBusy(tile, busy) {
+    if (busy) tile.classList.add("busy");
+    else tile.classList.remove("busy");
+}
+
 function showPayloadMenu(readyState) {
     const ready = readyState !== false;
-    document.body.classList.remove("prompt-ready");
-    if (ready) document.body.classList.remove("menu-loading");
-    document.body.classList.add("loader-ready");
+    populatePayloadButtons();
+
     const prompt = document.getElementById("loaderPrompt");
-    prompt.className = "";
-    prompt.style.display = "none";
+    prompt.classList.remove("on");
     navEl.textContent = "";
     navEl.style.display = "none";
-    payloadMenuEl.className = "on";
-    document.body.style.display = "block";
-    document.body.style.width = "100%";
-    document.body.style.height = "100vh";
-    document.body.style.padding = "0";
-    document.body.style.margin = "0";
-    document.body.style.overflow = "hidden";
-    payloadMenuEl.style.display = "block";
-    payloadMenuEl.style.width = "100%";
-    payloadMenuEl.style.maxWidth = "none";
-    payloadMenuEl.style.height = "100vh";
-    payloadMenuEl.style.margin = "0";
+
+    payloadMenuEl.classList.add("on");
+    switchAppView("payloads-view");
+
     const networkStatus = document.getElementById("payloadNetworkStatus");
     if (networkStatus) {
         networkStatus.innerHTML = consoleNetworkInfo.ip
@@ -979,40 +1067,41 @@ function showPayloadMenu(readyState) {
                 + (consoleNetworkInfo.name ? " (" + consoleNetworkInfo.name + ")" : "")
             : "Listening on console port 9021";
     }
+
     const grid = payloadMenuEl.getElementsByClassName("payloadGrid")[0];
-    if (grid) {
-        grid.style.display = "block";
-        grid.style.width = "100%";
-        grid.style.height = "calc(100vh - 120px)";
-        grid.style.padding = "1rem 1.25rem 2rem";
-        grid.style.overflowY = "auto";
-        grid.style.textAlign = "center";
-        grid.style.boxSizing = "border-box";
-        grid.style.fontSize = "0";
-    }
+    if (grid) grid.removeAttribute("style");
+
     const tiles = payloadMenuEl.getElementsByClassName("payloadTile");
     for (let i = 0; i < tiles.length; ++i) {
-        tiles[i].className = ready ? "payloadTile" : "payloadTile busy";
+        setPayloadTileBusy(tiles[i], !ready);
         tiles[i].style.pointerEvents = ready ? "auto" : "none";
         tiles[i].tabIndex = ready ? 0 : -1;
-        tiles[i].style.display = "inline-block";
-        tiles[i].style.verticalAlign = "top";
-        tiles[i].style.width = "47%";
-        tiles[i].style.margin = ".5rem 1%";
-        tiles[i].style.boxSizing = "border-box";
     }
+
     const progress = document.getElementById("payloadProgress");
     if (progress && ready)
         progress.textContent = "Select a payload to send it to the ELF loader.";
+
     setTimeout(function () {
         const firstRect = tiles.length ? tiles[0].getBoundingClientRect() : null;
+        const firstStyle = tiles.length ? getComputedStyle(tiles[0]) : null;
+        const firstTitle = tiles.length
+            ? tiles[0].getElementsByClassName("payload-btn-title")[0] : null;
+        const titleStyle = firstTitle ? getComputedStyle(firstTitle) : null;
         flushMark("ELFLDR-MENU-VISIBLE", "tiles=" + tiles.length
             + "-menu=" + getComputedStyle(payloadMenuEl).display
-            + "-firstW=" + (firstRect ? Math.round(firstRect.width) : 0));
+            + "-firstW=" + (firstRect ? Math.round(firstRect.width) : 0)
+            + "-firstH=" + (firstRect ? Math.round(firstRect.height) : 0)
+            + "-firstDisplay=" + (firstStyle ? firstStyle.display : "none")
+            + "-firstColor=" + (firstStyle ? firstStyle.color : "none")
+            + "-titleDisplay=" + (titleStyle ? titleStyle.display : "none")
+            + "-titleColor=" + (titleStyle ? titleStyle.color : "none")
+            + "-titleFill=" + (titleStyle
+                ? (titleStyle.webkitTextFillColor || "unset") : "none")
+            + "-titleText=" + (firstTitle ? clean(firstTitle.textContent) : "none"));
         sendRemoteEvents(false);
     }, 0);
 }
-
 function setPayloadTileState(tile, state) {
     tile.setAttribute("data-state", state);
     const status = tile.getElementsByClassName("payloadStatus")[0];
@@ -1049,38 +1138,23 @@ async function probeExistingElfLoader() {
 
 function openExistingPayloadMenu() {
     elfldrSpawned = true;
-    document.body.classList.add("loader-ready");
     clearFailureBanners();
     setCatResult(true);
     showVerdict(false, "ELF LOADER ALREADY READY ON PORT 9021");
     stage("ELF LOADER READY -- opening payload menu", "ok");
-    flushMark("ELFLDR-REUSED", "bind-probe-found-127.0.0.1-port=9021-owned");
     showPayloadMenu();
+    flushMark("ELFLDR-REUSED", "bind-probe-found-127.0.0.1-port=9021-owned");
 }
 
 function showLoaderPrompt() {
-    document.body.classList.remove("loader-ready");
-    document.body.classList.remove("menu-loading");
-    document.body.classList.add("prompt-ready");
-    document.body.style.display = "block";
-    document.body.style.width = "100%";
-    document.body.style.height = "100vh";
-    document.body.style.padding = "0";
-    document.body.style.margin = "0";
     clearFailureBanners();
-    payloadMenuEl.className = "";
-    payloadMenuEl.style.display = "none";
+    payloadMenuEl.classList.remove("on");
     const prompt = document.getElementById("loaderPrompt");
-    prompt.className = "on";
-    prompt.style.display = "block";
-    prompt.style.width = "70%";
-    prompt.style.margin = "25vh auto 0";
-    prompt.style.boxSizing = "border-box";
+    prompt.classList.add("on");
+    switchAppView("prompt-view");
     const promptButtons = prompt.getElementsByClassName("promptButton");
     for (let i = 0; i < promptButtons.length; ++i) {
-        promptButtons[i].style.display = "block";
-        promptButtons[i].style.width = "70%";
-        promptButtons[i].style.margin = ".5rem auto";
+        promptButtons[i].removeAttribute("style");
     }
     const button = document.getElementById("promptJailbreak");
     button.href = PRODUCTION_HREF;
@@ -1279,13 +1353,13 @@ async function sendPayloadInPlace(name, tile) {
     const toast = showPayloadToast(title + ": Fetching...");
     const tiles = payloadMenuEl.getElementsByClassName("payloadTile");
     for (let i = 0; i < tiles.length; ++i)
-        tiles[i].className = "payloadTile busy";
-    tile.className = "payloadTile";
+        setPayloadTileBusy(tiles[i], true);
+    setPayloadTileBusy(tile, false);
     setPayloadTileState(tile, "sending");
     try {
         updatePayloadToast(toast, title + ": Sending to port 9021...");
         const result = await sendPayloadToElfldr(name);
-        tile.className = "payloadTile";
+        setPayloadTileBusy(tile, false);
         setPayloadTileState(tile, "sent");
         updatePayloadToast(toast, title + ": Sent to port 9021");
         dismissPayloadToast(toast, 2000);
@@ -1296,7 +1370,7 @@ async function sendPayloadInPlace(name, tile) {
             flushMark("ELF-SOCKET-CLOSE-WARN", "name=" + clean(result.name)
                 + "-why=" + clean(result.closeWarning.message || result.closeWarning));
     } catch (error) {
-        tile.className = "payloadTile";
+        setPayloadTileBusy(tile, false);
         setPayloadTileState(tile, "failed");
         updatePayloadToast(toast, title + ": Error: "
             + (error && error.message ? error.message : error));
@@ -1307,13 +1381,13 @@ async function sendPayloadInPlace(name, tile) {
         if (payloadSenderBlocked) {
             payloadSendBusy = true;
             for (let i = 0; i < tiles.length; ++i)
-                tiles[i].className = "payloadTile busy";
+                setPayloadTileBusy(tiles[i], true);
             setCatResult(false);
             flushMark("ELF-SENDER-BLOCKED", clean(payloadSenderBlocked));
         } else {
             payloadSendBusy = false;
             for (let i = 0; i < tiles.length; ++i)
-                if (tiles[i] !== tile) tiles[i].className = "payloadTile";
+                if (tiles[i] !== tile) setPayloadTileBusy(tiles[i], false);
             try { tile.focus(); } catch (e) { }
         }
     }
@@ -1342,27 +1416,11 @@ function dismissPayloadToast(toast, delay) {
     }, delay);
 }
 
-{
-    const tiles = payloadMenuEl.getElementsByClassName("payloadTile");
-    for (let i = 0; i < tiles.length; ++i) {
-        const tile = tiles[i];
-        tile.onclick = function (e) {
-            if (e && e.preventDefault) e.preventDefault();
-            sendPayloadInPlace(tile.getAttribute("data-name"), tile);
-            return false;
-        };
-    }
-}
-
 function stage(text, cls) {
     if (cls === "bad") setCatResult(false);
     if (elfldrSpawned && cls === "bad") return;
     stageEl.textContent = text;
     stageEl.className = cls || "";
-    if (document.body.classList.contains("menu-loading")) {
-        const progress = document.getElementById("payloadProgress");
-        if (progress) progress.textContent = text;
-    }
 }
 function danger(text) {
     if (elfldrSpawned) return;
