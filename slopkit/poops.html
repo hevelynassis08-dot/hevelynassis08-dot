@@ -840,7 +840,6 @@ function screenMark(tag, extra) {
     if (tag === "STAGE5-DONE" && /(?:^|-)joinRet=0(?:-|$)/.test(s0) &&
         /(?:^|-)shellcodeRet=0x0+(?:-|$)/.test(s0)) {
         elfldrSpawned = true;
-        document.body.classList.add("loader-ready");
         clearFailureBanners();
         setCatResult(true);
         showVerdict(false, "ELF LOADER READY");
@@ -1011,15 +1010,6 @@ function showPayloadMenu(readyState) {
             + "-firstW=" + (firstRect ? Math.round(firstRect.width) : 0));
         sendRemoteEvents(false);
     }, 0);
-}
-
-function showPayloadMenuLoading(message) {
-    document.body.classList.add("menu-loading");
-    showPayloadMenu(false);
-    const networkStatus = document.getElementById("payloadNetworkStatus");
-    if (networkStatus) networkStatus.textContent = "ELF loader setup in progress";
-    const progress = document.getElementById("payloadProgress");
-    if (progress) progress.textContent = message || "Preparing payload sender...";
 }
 
 function setPayloadTileState(tile, state) {
@@ -2584,8 +2574,6 @@ function lastRunText() {
     }
 
     renderNav("", false);
-    if (cfg.payload === "1")
-        showPayloadMenuLoading("Preparing jailbreak and ELF loader...");
     main().catch(err => {
         const m = (err && err.message) || String(err);
         stage("boot failed: " + m, "bad");
