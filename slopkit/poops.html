@@ -844,6 +844,7 @@ function screenMark(tag, extra) {
         setCatResult(true);
         showVerdict(false, "ELF LOADER READY");
         stage("ELF LOADER READY", "ok");
+        showPayloadMenu();
     }
     catState(tag, s0);
     captureRemoteEvent(tag, s0);
@@ -2129,7 +2130,7 @@ async function runLadder() {
     if (payloadSuccess) {
         flushMark("ELFLDR-MENU-INPAGE",
             "no-navigation-parked-racers-and-fds-remain-owned-port=9021");
-        showPayloadMenu();
+        if (!payloadMenuEl.classList.contains("on")) showPayloadMenu();
     }
 }
 
