@@ -139,9 +139,6 @@ export function buildRthdr(u8, off, size) {
   return (len + 1) << 3;
 }
 
-export function w8(u8, o, v) {
-  u8[o] = v & 0xff;
-}
 export function w16(u8, o, v) {
   u8[o] = v & 0xff;
   u8[o + 1] = (v >>> 8) & 0xff;
@@ -170,14 +167,6 @@ export function w64(u8, o, v) {
     w32(u8, o + 4, Math.floor(v / 0x100000000) >>> 0);
   }
 }
-export function r64hex(u8, o) {
-  const hi = r32(u8, o + 4),
-    lo = r32(u8, o);
-  return hi === 0
-    ? lo.toString(16)
-    : hi.toString(16) + lo.toString(16).padStart(8, "0");
-}
-
 export function coreList(mask) {
   const out = [];
   for (let i = 0; i < 32; ++i) if ((mask >>> i) & 1) out.push(i);
@@ -3269,10 +3258,6 @@ export const PK = {
 
 const M1LO = 0xffffffff,
   M1HI = 0xffffffff;
-
-export function r64parts(u8, o) {
-  return { low: r32(u8, o) >>> 0, hi: r32(u8, o + 4) >>> 0 };
-}
 
 export function isKernelPtr(v) {
   return v !== null && v !== undefined && v.hi >>> 16 === 0xffff;
