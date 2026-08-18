@@ -1,0 +1,12 @@
+{
+  "13.60": {
+    "kernel_base": "0x00000000",
+    "copy_function": "0x00000000",
+    "sce_call": "0x00000000"
+  },
+  "13.52": {
+    "kernel_base": "0x00000000",
+    "copy_function": "0x00000000",
+    "sce_call": "0x00000000"
+  }
+}
